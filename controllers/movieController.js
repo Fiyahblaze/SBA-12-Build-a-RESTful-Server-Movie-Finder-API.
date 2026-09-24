@@ -19,6 +19,12 @@ async function searchMovies(req, res) {
 
     res.json(response.data);
   } catch (error) {
+    console.error("OMDb search failed:", {
+      code: error.code,
+      status: error.response?.status,
+      message: error.response?.data?.Error || error.message,
+    });
+
     res.status(500).json({
       error: "Unable to search for movies",
     });
@@ -36,6 +42,12 @@ async function getMovieDetails(req, res) {
 
     res.json(response.data);
   } catch (error) {
+    console.error("OMDb details failed:", {
+      code: error.code,
+      status: error.response?.status,
+      message: error.response?.data?.Error || error.message,
+    });
+
     res.status(500).json({
       error: "Unable to get movie details",
     });
