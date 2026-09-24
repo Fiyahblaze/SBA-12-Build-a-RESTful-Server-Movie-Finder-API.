@@ -1,28 +1,13 @@
-// DEPENDENCIES
-const express = require('express');
+require("dotenv").config();
+
+const express = require("express");
+const movieRoutes = require("./routes/movieRoutes.js");
+
 const app = express();
-require('dotenv').config();
-const PORT = process.env.PORT;
-const landingRouter = require("./routes/index.js");
+const PORT = process.env.PORT || 3001;
 
-// MIDDLEWARE - Communication between endpoints, runs between req and res.
-app.use("/", landingRouter)
+app.use("/api", movieRoutes);
 
-
-// ROUTES
-app.get("/home", (req, res)=>{
-    res.send("This is the Home page!")
-});
-
-app.get("/about", (req, res)=>{
-    res.send("This is the About page!")
-});
-
-app.get("/contact", (req, res)=>{
-    res.send("This is the Contact page!")
-});
-
-// PORT
-app.listen(PORT, ()=>{
-    console.log(`Server is running on localhost:${PORT}`)
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
